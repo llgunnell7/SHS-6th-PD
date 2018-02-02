@@ -7,9 +7,20 @@
 ####
 
 team_name = 'Team 1' # Only 10 chars displayed.
-strategy_name = 'The name the team gives to this strategy'
-strategy_description = 'How does this strategy decide?'
-    
+strategy_name = 'Pattern recognizer'
+strategy_description = 'Recognizes several patterns, then acts accordingly'
+def probability(their_history):
+    betray=0.
+    count=len(their_history)
+    count=count*1.
+    prob=0.
+    for i in their_history:
+        if i == 'b':
+            betray=betray+1.
+    prob=betray/count
+    return prob
+        
+
 def move(my_history, their_history, my_score, their_score):
     ''' Arguments accepted: my_history, their_history are strings.
     my_score, their_score are ints.
@@ -17,18 +28,42 @@ def move(my_history, their_history, my_score, their_score):
     Make my move.
     Returns 'c' or 'b'. 
     '''
-
+    if len(my_history)<3: #colludes first 3 turns to get history ready
+        return 'c'
+    else:
+        prob=probability(their_history)
+        previous = their_history[-3:] #short patterns
+        extendedprevious = their_history[-25:-1] #big patterns
+        lastprevious = their_history[-1]#last move
+        myprevious = my_history[-4:-1]#short patterns, checks if they are copying moves
+        lastmyprevious = my_history[-1]#last move
+        if previous == 'bbb': #works against always betray
+            return 'b'
+        if previous == 'ccc': #works with always colludes and collude until betrayed
+            return 'c'
+        if previous == 'bcb': #checks for alternate, might need work
+                return 'c'
+        if previous == 'cbc': #checks for alternate, might need work
+            return 'b'
+        if previous == myprevious: #checks for 'tit for tat' codes and works with them
+            if lastmyprevious == 'c':
+                return 'c'
+            else:
+                return 'b'
+                
+        if lastprevious == 'b' and prob < .25: #checks for if they suddenly betray
+            return 'b'
+        else:
+            return 'b' #call probability procedure in here later
     # my_history: a string with one letter (c or b) per round that has been played with this opponent.
     # their_history: a string of the same length as history, possibly empty. 
     # The first round between these two players is my_history[0] and their_history[0].
     # The most recent round is my_history[-1] and their_history[-1].
-    
+    #Probability doesn't work as expected, trying new method
     # Analyze my_history and their_history and/or my_score and their_score.
     # Decide whether to return 'c' or 'b'.
-    
-    return 'c'
 
-    
+        
 def test_move(my_history, their_history, my_score, their_score, result):
     '''calls move(my_history, their_history, my_score, their_score)
     from this module. Prints error if return value != result.
