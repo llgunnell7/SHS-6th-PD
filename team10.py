@@ -8,7 +8,7 @@
 
 team_name = "Dogecoin Investors" # Only 10 chars displayed.
 strategy_name = 'The counterererererer to everything'
-strategy_description = 'How does this strategy decide?'
+strategy_description = 'The code decides according to what the opponents history is.'
     
 def move(my_history, their_history, my_score, their_score):
     ''' Arguments accepted: my_history, their_history are strings.
