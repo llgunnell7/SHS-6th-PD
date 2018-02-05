@@ -18,6 +18,7 @@ def probability(their_history):
         if i == 'b':
             betray=betray+1.
     prob=betray/count
+    print (prob)
     return prob
         
 
@@ -29,11 +30,12 @@ def move(my_history, their_history, my_score, their_score):
     Returns 'c' or 'b'. 
     '''
     if len(my_history)<3: #colludes first 3 turns to get history ready
-        return 'c'
+     return'c'   
     else:
         prob=probability(their_history)
+        print (prob)
         previous = their_history[-3:] #short patterns
-        extendedprevious = their_history[-25:-1] #big patterns
+        fprevious = their_history[-5:]
         lastprevious = their_history[-1]#last move
         myprevious = my_history[-4:-1]#short patterns, checks if they are copying moves
         lastmyprevious = my_history[-1]#last move
@@ -41,9 +43,9 @@ def move(my_history, their_history, my_score, their_score):
             return 'b'
         if previous == 'ccc': #works with always colludes and collude until betrayed
             return 'c'
-        if previous == 'bcb': #checks for alternate, might need work
-                return 'c'
-        if previous == 'cbc': #checks for alternate, might need work
+        if fprevious == 'bcbcb': #checks for alternate, might need work
+                return 'b'
+        if fprevious == 'cbcbc': #checks for alternate, might need work
             return 'b'
         if previous == myprevious: #checks for 'tit for tat' codes and works with them
             if lastmyprevious == 'c':
