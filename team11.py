@@ -8,7 +8,7 @@
 
 team_name = 'Screamin Berries' # Only 10 chars displayed.
 strategy_name = 'Collude 1st 100 rounds, then start betraying unless betrayed before the 100th round'
-strategy_description = 'How does this strategy decide?'
+strategy_description = 'We will collude until the 100th round, then start betraying, unless we were betrayed before the 100th round. If we were betrayed the round before, we will betray.'
     
 def move(my_history, their_history, my_score, their_score):
     ''' Arguments accepted: my_history, their_history are strings.
