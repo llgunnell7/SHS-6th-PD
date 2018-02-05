@@ -6,7 +6,7 @@
 #     move: A function that returns 'c' or 'b'
 ####
 team_name = 'Walmart Greeters' # Only 10 chars displayed.
-strategy_name = 'The name the team gives to this strategy'
+strategy_name = 'B and C after a certain amount of times'
 strategy_description = 'How does this strategy decide?'
     
 def move(my_history, their_history, my_score, their_score):
