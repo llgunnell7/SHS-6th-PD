@@ -7,8 +7,8 @@
 ####
 
 team_name = 'Screamin Berries' # Only 10 chars displayed.
-strategy_name = 'The name the team gives to this strategy'
-strategy_description = 'How does this strategy decide?'
+strategy_name = 'Collude 1st 100 rounds, then start betraying unless betrayed before the 100th round'
+strategy_description = 'We will collude until the 100th round, then start betraying, unless we were betrayed before the 100th round. If we were betrayed the round before, we will betray.'
     
 def move(my_history, their_history, my_score, their_score):
     ''' Arguments accepted: my_history, their_history are strings.
@@ -25,8 +25,23 @@ def move(my_history, their_history, my_score, their_score):
     
     # Analyze my_history and their_history and/or my_score and their_score.
     # Decide whether to return 'c' or 'b'.
+    def hundred_moves(my_history):
+        global hundred_moves
+        hundred_moves = False
+        if len(my_history)>=100:
+            hundred_moves = True
+            return hundred_moves
     
-    return 'c'
+    if len(my_history)==0:
+        return 'c'
+    if 'c' in my_history[-1] and 'b' in their_history[-1]:
+        return 'b'
+    if len(their_history)>=10 and 'b' in their_history[-10]:
+        return 'b'
+    if hundred_moves is True:
+        return 'b'
+    else:
+        return 'c'
 
     
 def test_move(my_history, their_history, my_score, their_score, result):
