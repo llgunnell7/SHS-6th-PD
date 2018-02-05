@@ -7,8 +7,8 @@
 ####
 
 team_name = 'Super cool' # Only 10 chars displayed.
-strategy_name = 'The name the team gives to this strategy'
-strategy_description = 'How does this strategy decide?'
+strategy_name = 'super cool strategy'
+strategy_description = 'Retaliates unless opponent betrays too much'
 
 global numberOfBetrayals
 
